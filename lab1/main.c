@@ -20,7 +20,7 @@ double func_poh_2(double x)
 
 int main()
 {
-    double x, x0, a, b, eps;
+    double x, x0, a, b, a1, b1,  eps;
     int count = 0;
     do
     {
@@ -35,6 +35,7 @@ int main()
     }while(a<0 || b<0 || a>8 || b>8 || //перевір ОДЗ
             (function(a)*function(b))>0 || (fabs(a-b)<eps));
 
+    a1 = a;b1 = b;
     while(fabs(a-b)>eps)
     {
         ++count;
@@ -46,22 +47,34 @@ int main()
         if(function(b)*function(x)>0)
             b=x;
     }
+    x=(a+b)/2;
     printf("x = %lf, iteration = %d, precision = %20.19lf\n", x, count, eps);
 
-    do
+    count = 0;
+    if(function(a1)*func_poh_2(a1)>0)
     {
-        printf("ODZ x є (0;8]\n");
-        printf("Enter a:");
-        scanf("%lf", &a);
-        printf("Enter b:");
-        scanf("%lf", &b);
-        printf("Enter eps:");
-        scanf("%lf", &eps);
+        x0 = a1;
+        x = x0 - ((function(x0)*(b1-x0))/(function(b1)-function(x0)));
+        while(fabs(x-x0)>eps)
+        {
+            ++count;
+            x0 = x;
+            x = x0 - ((function(x0)*(b1-x0))/(function(b1)-function(x0)));
+        }
+    }
 
-    }while(a<0 || b<0 || a>8 || b>8 || //перевір ОДЗ
-           (function(a)*function(b))>0 || (fabs(a-b)<eps));
-
-
+    if(function(b1)*func_poh_2(b1)>0)
+    {
+        x0 = b1;
+        x = x0 - ((function(x0)*(a1-x0))/(function(a1)-function(x0)));
+        while(fabs(x-x0)>eps)
+        {
+            ++count;
+            x0 = x;
+            x = x0 - ((function(x0)*(a1-x0))/(function(a1)-function(x0)));
+        }
+    }
+    printf("x = %lf, iteration = %d, precision = %20.19lf\n", x, count, eps);
 
     return 0;
 }
