@@ -12,13 +12,16 @@ int main()
     int count = 0;
     do
     {
+        printf("ODZ x є (0;8]\n");
         printf("Enter a:");
         scanf("%f", &a);
         printf("Enter b:");
         scanf("%f", &b);
         printf("Enter eps:");
         scanf("%f", &eps);
-    }while((function(a)*function(b))>0 || (fabsf(a-b)<eps));
+
+    }while(a<0 || b<0 || a>8 || b>8 || //перевір ОДЗ
+            (function(a)*function(b))>0 || (fabsf(a-b)<eps));
 
     while(fabsf(a-b)>eps)
     {
@@ -32,6 +35,18 @@ int main()
             b=x;
     }
     printf("x = %f, iteration = %d, precision = %f\n", x, count, eps);
+
+    do
+    {
+        printf("Enter a:");
+        scanf("%f", &a);
+        printf("Enter b:");
+        scanf("%f", &b);
+        printf("Enter eps:");
+        scanf("%f", &eps);
+    }while((function(a)*function(b))>0 || (fabsf(a-b)<eps));
+
+
 
 
     return 0;
