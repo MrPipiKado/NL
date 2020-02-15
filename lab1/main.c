@@ -3,19 +3,22 @@
 
 double function(double x)
 {//задана функція
-    return sqrt(64.0f-x*x)*log2(x)-sin(2*x);
+    //return sqrt(64.0f-x*x)*log2(x)-sin(2*x);
+    return x*x*x-3*x*x+9*x-8;
 }
 
 double func_poh_1(double x)
 {//перша похідна
-    return (-log2(x)/sqrt(64.0-x*x)) + (sqrt(64.0-x*x)/(x*M_LN2)) - 2*cos(2*x);
+    //return (-log2(x)/sqrt(64.0-x*x)) + (sqrt(64.0-x*x)/(x*M_LN2)) - 2*cos(2*x);
+    return 3*x*x-6*x+9;
 }
 
 double func_poh_2(double x)
 {//друга похідна
-    return 4*sin(2*x) -(sqrt(64-x*x)/(x*x*M_LN2)) -
-            ((x*x)/(sqrt((64.0-x*x)*(64.0-x*x)*(64.0-x*x))*log2(x))) -
-            (2/(sqrt(64.0-x*x)*M_LN2)) - (1/(sqrt(64.0-x*x)*log2(x)));
+    //return 4*sin(2*x) -(sqrt(64-x*x)/(x*x*M_LN2)) -
+      //      ((x*x)/(sqrt((64.0-x*x)*(64.0-x*x)*(64.0-x*x))*log2(x))) -
+        //    (2/(sqrt(64.0-x*x)*M_LN2)) - (1/(sqrt(64.0-x*x)*log2(x)));
+    return 6*x-6;
 }
 
 int main()
@@ -32,22 +35,22 @@ int main()
         printf("Enter eps:");
         scanf("%lf", &eps);
 
-    }while(a<0 || b<0 || a>8 || b>8 || //перевір ОДЗ
+    }while(//a<0 || b<0 || a>8 || b>8 || //перевір ОДЗ
             (function(a)*function(b))>0 || (fabs(a-b)<eps));
 
     a1 = a;b1 = b;
-    while(fabs(a-b)>eps)
+    while(fabs(b-a)>eps)
     {
         ++count;
         x = (a+b)/2;
-        if((!(x>0))&&(!(x<0)))
+        if((!(function(x)>0))&&(!(function(x)<0)))
             break;
         if(function(a)*function(x)>0)
             a=x;
-        if(function(b)*function(x)>0)
+        else
             b=x;
     }
-    x=(a+b)/2;
+    //x=(a+b)/2;
     printf("x = %lf, iteration = %d, precision = %20.19lf\n", x, count, eps);
 
     count = 0;
