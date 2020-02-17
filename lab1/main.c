@@ -48,6 +48,7 @@ int main()
         else
             b=x;
     }
+    x = (a + b)/2;
     printf("Navpil: x = %lf, iteration = %d\n", x, count);
 
     count = 0;
