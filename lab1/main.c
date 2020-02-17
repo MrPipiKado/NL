@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-
+#include <cs50.h>
 double function(double x)
 {//задана функція
     //return sqrt(64.0f-x*x)*log2(x)-sin(2*x);
@@ -27,7 +27,6 @@ int main()
     int count = 0;
     do
     {
-        printf("ODZ x є (0;8]\n");
         printf("Enter a:");
         scanf("%lf", &a);
         printf("Enter b:");
@@ -35,8 +34,7 @@ int main()
         printf("Enter eps:");
         scanf("%lf", &eps);
 
-    }while(//a<0 || b<0 || a>8 || b>8 || //перевір ОДЗ
-            (function(a)*function(b))>0 || (fabs(a-b)<eps));
+    }while((b<a) || (function(a)*function(b))>0 || (fabs(a-b)<eps));
 
     a1 = a;b1 = b;
     while(fabs(b-a)>eps)
@@ -50,8 +48,7 @@ int main()
         else
             b=x;
     }
-    //x=(a+b)/2;
-    printf("x = %lf, iteration = %d, precision = %20.19lf\n", x, count, eps);
+    printf("Navpil: x = %lf, iteration = %d\n", x, count);
 
     count = 0;
     if(function(a1)*func_poh_2(a1)>0)
@@ -77,7 +74,7 @@ int main()
             x = x0 - ((function(x0)*(a1-x0))/(function(a1)-function(x0)));
         }
     }
-    printf("x = %lf, iteration = %d, precision = %20.19lf\n", x, count, eps);
+    printf("Horda: x = %lf, iteration = %d\n", x, count);
 
     return 0;
 }
