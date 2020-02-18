@@ -23,7 +23,7 @@ double func_poh_2(double x)
 
 int main()
 {
-    double x, x0, a, b, a1, b1,  eps;
+    double x, x0, a, b, a1, b1,a2,b2, eps;
     int count = 0;
     do
     {
@@ -36,7 +36,7 @@ int main()
 
     }while((b<a) || (function(a)*function(b))>0 || (fabs(a-b)<eps));
 
-    a1 = a;b1 = b;
+    a1 = a;b1 = b;a2=a;b2=b;
     while(fabs(b-a)>eps)
     {
         ++count;
@@ -77,5 +77,17 @@ int main()
     }
     printf("Horda: x = %lf, iteration = %d\n", x, count);
 
+    count = 0;
+
+    x0 = function(b2)*func_poh_2(b2) > 0 ? b2 : a2;
+    x = x0 - function(x0)/func_poh_1(x0);
+
+    while(fabs(x-x0)>eps)
+    {
+        x0 = x;
+        x = x0 -function(x0)/func_poh_1(x0);
+        ++count;
+    }
+    printf("Dotychna: x = %lf, iteration = %d\n", x, count);
     return 0;
 }
