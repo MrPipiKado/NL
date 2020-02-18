@@ -23,7 +23,7 @@ double func_poh_2(double x)
 
 int main()
 {
-    double x, x0, a, b, a1, b1,a2,b2, eps;
+    double x, x0, a, b, a1, b1, a2, b2, a3, b3, eps;
     int count = 0;
     do
     {
@@ -36,7 +36,7 @@ int main()
 
     }while((b<a) || (function(a)*function(b))>0 || (fabs(a-b)<eps));
 
-    a1 = a;b1 = b;a2=a;b2=b;
+    a1 = a;b1 = b;a2=a;b2=b;a3=a;b3=b;
     while(fabs(b-a)>eps)
     {
         ++count;
@@ -89,5 +89,17 @@ int main()
         ++count;
     }
     printf("Dotychna: x = %lf, iteration = %d\n", x, count);
+
+
+    count=0;
+    x0 = function(b3)*func_poh_2(b3) > 0 ? b3 : a3;
+    x = pow(3*x0*x0-9*x0+8, 1./3.);
+    while(fabs(x-x0)>eps)
+    {
+        x0 = x;
+        x = pow(3*x0*x0-9*x0+8, 1./3.);
+        ++count;
+    }
+    printf("Iterachia: x = %lf, iteration = %d\n", x, count);
     return 0;
 }
