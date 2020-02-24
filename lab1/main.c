@@ -37,6 +37,8 @@ int main()
     }while((b<a) || (function(a)*function(b))>0 || (fabs(a-b)<eps));
 
     a1 = a;b1 = b;a2=a;b2=b;a3=a;b3=b;
+
+    
     while(fabs(b-a)>eps)
     {
         ++count;
@@ -49,7 +51,7 @@ int main()
             b=x;
     }
     x = (a + b)/2;
-    printf("Navpil: x = %lf, iteration = %d\n", x, count);
+    printf("Dichotomy: x = %lf, iteration = %d\n", x, count);
 
     count = 0;
     if(function(a1)*func_poh_2(a1)>0)
@@ -75,7 +77,7 @@ int main()
             x = x0 - ((function(x0)*(a1-x0))/(function(a1)-function(x0)));
         }
     }
-    printf("Horda: x = %lf, iteration = %d\n", x, count);
+    printf("Сhord: x = %lf, iteration = %d\n", x, count);
 
     count = 0;
 
@@ -88,7 +90,7 @@ int main()
         x = x0 -function(x0)/func_poh_1(x0);
         ++count;
     }
-    printf("Dotychna: x = %lf, iteration = %d\n", x, count);
+    printf("Tangent: x = %lf, iteration = %d\n", x, count);
 
 
     count=0;
@@ -100,6 +102,6 @@ int main()
         x = pow(3*x0*x0-9*x0+8, 1./3.);
         ++count;
     }
-    printf("Iterachia: x = %lf, iteration = %d\n", x, count);
+    printf("Iteration: x = %lf, iteration = %d\n", x, count);
     return 0;
 }
