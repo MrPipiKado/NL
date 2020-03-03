@@ -51,7 +51,7 @@ int main()
             b=x;
     }
     x = (a + b)/2;
-    printf("Dichotomy: x = %lf, iteration = %d\n", x, count);
+    //printf("Dichotomy: x = %lf, iteration = %d\n", x, count);
 
     count = 0;
     if(function(a1)*func_poh_2(a1)>0)
@@ -77,7 +77,7 @@ int main()
             x = x0 - ((function(x0)*(a1-x0))/(function(a1)-function(x0)));
         }
     }
-    printf("Сhord: x = %lf, iteration = %d\n", x, count);
+    //printf("Сhord: x = %lf, iteration = %d\n", x, count);
 
     count = 0;
 
