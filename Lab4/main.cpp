@@ -26,6 +26,8 @@ void diagon(double A[3][4])
             A[j][i] = tmp;
         }
     }
+
+    std::cout << "Matrix with main elements:\n";
     for(int i = 0; i<3; ++i)
     {
         for(int j = 0; j<4; ++j)
@@ -59,6 +61,7 @@ void make_triangle(double A[3][4])
             }
         }
     }
+    std::cout << "Triangle matrix:\n";
     for(int i = 0; i<3; ++i)
     {
         for(int j = 0; j<4; ++j)
@@ -116,7 +119,24 @@ void fill_L_U(double A[3][4], double L[3][3], double U[3][3])
             }
         }
     }
-
+    std::cout << "L matrix:\n";
+    for(int i = 0; i<3; ++i)
+    {
+        for(int j = 0; j<4; ++j)
+        {
+            std::cout << L[i][j] << "||";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << "U matrix:\n";
+    for(int i = 0; i<3; ++i)
+    {
+        for(int j = 0; j<4; ++j)
+        {
+            std::cout << U[i][j] << "||";
+        }
+        std::cout << std::endl;
+    }
 }
 void get_x_y(double A[3][4], double L[3][3], double U[3][3], double X[3][1], double Y[3][1])
 {
@@ -152,11 +172,24 @@ int main()
                       {1.15, 0.43, -0.72, 1.24},
                       {0.56, -0.18, 1.03, 2.15}};
     double Ad[3][4], X[3][1], L[3][3], U[3][3], Y[3][1];
+    std::cout << "Matrix:\n";
+    for(int i = 0; i<3; ++i)
+    {
+        for(int j = 0; j<4; ++j)
+        {
+            std::cout << std::fixed << std::showpos << std::setw( 4 ) << std::setprecision( 5 )
+                      << std::setfill( '0' )<< A[i][j] << "||";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
     copy_matrix(A, Ad);
     diagon(Ad);
     make_triangle(Ad);
+    std::cout <<"Answer:"<< std::endl;
     get_x(Ad, X);
     fill_L_U(A, L, U);
+    std::cout <<"Answer:"<< std::endl;
     get_x_y(A, L, U, X, Y);
     return 0;
 }
