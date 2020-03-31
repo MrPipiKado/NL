@@ -91,56 +91,45 @@ void get_x_y(double A[3][3], double B[3][1], double X[3][1])
 {
     double L[3][3], U[3][3], Y[3][1];
     int i = 0, j = 0, k = 0;
-    for (i = 0; i < 3; i++)
-    {
-        for (j = 0; j < 3; j++)
-        {
-            if (j < i)
-                L[j][i] = 0;
-            else {
-                L[j][i] = A[j][i];
-                for (k = 0; k < i; k++)
-                {
-                    L[j][i] = L[j][i] - L[j][k] * U[k][i];
+    for (int i = 0; i < 3; i++) {
+        L[i][0] = A[i][0];
+        U[0][i] = A[0][i] / A[0][0];
+        U[i][i] = 1;
+    }
+    double sum;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (i >= j) {
+                sum = 0;
+                for (int k = 0; k < j; k++) {
+                    sum += L[i][k] * U[k][j];
                 }
-            }
-        }
-        for (j = 0; j < 3; j++)
-        {
-            if (j < i)
-                U[i][j] = 0;
-            else if (j == i)
-                U[i][j] = 1;
-            else {
-                U[i][j] = A[i][j] / L[i][i];
-                for (k = 0; k < i; k++)
-                {
-                    U[i][j] = U[i][j] - ((L[i][k] * U[k][j]) / L[i][i]);
+                L[i][j] = A[i][j] - sum;
+            } else {
+                sum = 0;
+                for (int k = 0; k < i; k++) {
+                    sum += L[i][k] * U[k][j];
                 }
+                U[i][j] = (A[i][j] - sum) / L[i][i];
             }
         }
     }
-    double sum = 0;
-    for(int i = 0; i<3; i++)
-    {
+    for(int i = 0; i < 3; i++){
         sum = 0;
-        for(int j = 0; j<i; j++)
-        {
-            sum+= L[i][j] * Y[j][0];
+        for(int j = 0;  j < i; j++){
+            sum+=L[i][j]*Y[j][0];
         }
-        Y[i][0] = 1 / L[i][i] * (B[i][0] - sum);
+        Y[i][0] = (B[i][0] - sum)/L[i][i];
     }
-
-    for(int i = 2; i>=0; i--)
-    {
+    for(int i = 3-1; i>=0; i--){
         sum = 0;
-        for(int j = 2; j>i; j--)
-        {
-            sum+= U[i][j] * X[j][0];
+        for(int j = 3-1;  j > i; j--){
+            sum+=U[i][j]*X[j][0];
         }
-        X[i][0] = (Y[i][0] - sum);
+        X[i][0] = Y[i][0] - sum;
     }
 }
+
 int main()
 {
     double A[5][3] = {{ 3,  1, -1},
@@ -149,7 +138,7 @@ int main()
                       { 1, -5,  3},
                       { 2, -4, -1}};
     double B[5][1] = { 2,
-                      -10,
+                       -10,
                        1,
                        7,
                        11};
@@ -160,9 +149,9 @@ int main()
     get_normal(A, AT, N);
     get_C(AT, B, C);
     get_L_LT(N, L, LT);
-    get_x_y(L, B, Y);
+    get_x_y(L, C, Y);
     get_x_y(LT, Y, X);
     for(int i = 0; i<3; ++i)
-        std::cout << "X" << i+1 << " = " << X[i][0] << std::endl;
+        std::cout<<X[i][0]<<std::endl;
     return 0;
 }
