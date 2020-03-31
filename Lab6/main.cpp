@@ -45,7 +45,7 @@ void get_normal(double A[5][3], double AT[3][5], double N[3][3])
 }
 void get_C(double AT[3][5], double B[5][1], double C[3][1])
 {
-    std::cout << std::endl;
+    std::cout << "СMatrix:" << std::endl;
     double tmp;
     for(int i = 0; i<3; ++i)
     {
@@ -151,6 +151,7 @@ int main()
     get_L_LT(N, L, LT);
     get_x_y(L, C, Y);
     get_x_y(LT, Y, X);
+    std::cout << "X:"<<std::endl;
     for(int i = 0; i<3; ++i)
         std::cout<<X[i][0]<<std::endl;
     return 0;
