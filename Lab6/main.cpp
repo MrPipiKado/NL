@@ -80,6 +80,9 @@ void get_L_LT(double N[3][3], double L[3][3], double LT[3][3])
     std::cout << "LTMatrix:"<<std::endl;
     for(int i = 0; i<3; ++i)
     {
+
+
+        
         for(int j = 0; j<3; ++j)
         {
             std::cout << LT[i][j] << "||" ;
@@ -87,35 +90,13 @@ void get_L_LT(double N[3][3], double L[3][3], double LT[3][3])
         std::cout << std::endl;
     }
 }
-void get_x_y(double A[3][3], double B[3][1], double X[3][1])
+void get_x_y(double L[3][3], double U[3][3], double B[3][1], double X[3][1])
 {
-    double L[3][3], U[3][3], Y[3][1];
+    double Y[3][1];
     int i = 0, j = 0, k = 0;
-    for (int i = 0; i < 3; i++) {
-        L[i][0] = A[i][0];
-        U[0][i] = A[0][i] / A[0][0];
-        U[i][i] = 1;
-    }
     double sum;
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            if (i >= j) {
-                sum = 0;
-                for (int k = 0; k < j; k++) {
-                    sum += L[i][k] * U[k][j];
-                }
-                L[i][j] = A[i][j] - sum;
-            } else {
-                sum = 0;
-                for (int k = 0; k < i; k++) {
-                    sum += L[i][k] * U[k][j];
-                }
-                U[i][j] = (A[i][j] - sum) / L[i][i];
-            }
-        }
-    }
     for(int i = 0; i < 3; i++){
-        sum = 0;
+        sum = 0; 
         for(int j = 0;  j < i; j++){
             sum+=L[i][j]*Y[j][0];
         }
@@ -126,7 +107,7 @@ void get_x_y(double A[3][3], double B[3][1], double X[3][1])
         for(int j = 3-1;  j > i; j--){
             sum+=U[i][j]*X[j][0];
         }
-        X[i][0] = Y[i][0] - sum;
+        X[i][0] = (Y[i][0] - sum)/U[i][i];
     }
 }
 
@@ -149,8 +130,7 @@ int main()
     get_normal(A, AT, N);
     get_C(AT, B, C);
     get_L_LT(N, L, LT);
-    get_x_y(L, C, Y);
-    get_x_y(LT, Y, X);
+    get_x_y(L, LT, C, X);
     std::cout << "X:"<<std::endl;
     for(int i = 0; i<3; ++i)
         std::cout<<X[i][0]<<std::endl;
