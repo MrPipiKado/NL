@@ -105,24 +105,24 @@ int main() {
     int n = 1;
     cout << "Enter a b: ";
     cin >> a >> b;
-    cout << "Left rectangles : ";
-    cout << get_integral(a, b, n, Left) << endl;
+    cout << "Left rectangles : "
+        << get_integral(a, b, n, Left) << endl;
     cout << "Iterations: " << n << endl << endl;
     n = 1;
-    cout << "Right rectangles : ";
-    cout << get_integral(a, b, n, Right) << endl;
+    cout << "Right rectangles : "
+        << get_integral(a, b, n, Right) << endl;
     cout << "Iterations: " << n << endl << endl;
     n = 1;
-    cout << "Middle rectangles : ";
-    cout << get_integral(a, b, n, Mid) << endl;
+    cout << "Middle rectangles : "
+        << get_integral(a, b, n, Mid) << endl;
     cout << "Iterations: " << n << endl << endl;
     n = 1;
-    cout << "Trap method: ";
-    cout << get_integral(a, b, n, Trap) << endl;
-    cout << "Iterations: " << n << endl << endl;
+    cout << "Trap method: "
+        << get_integral(a, b, n, Trap) << endl
+        << "Iterations: " << n << endl << endl;
     n = 2;
     cout << "Simpson method: ";
-    cout << get_integral(a, b, n, Simpson) << endl;
-    cout << "Iterations: " << n << endl << endl;
+    cout << get_integral(a, b, n, Simpson) << endl
+        << "Iterations: " << n << endl << endl;
     return 0;
 }
